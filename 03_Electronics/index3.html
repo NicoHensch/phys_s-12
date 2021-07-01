@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PHYS S-12: Intro to Digital Fabrication </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+  <link href="../style.css" rel="stylesheet">
+  <style>
+   img {
+     border-radius: 30px;    
+    
+  </style>
+</head>
+<body  style="background-color:lightgrey; font-family:Trebuchet MS,sans-serif;">
+
+<div class="container-fluid">
+  <div class="row">
+    <header class="col-md-4">
+      <h2><b><a href='../index.html'>PHYS S-12: Introduction to Digital Fabrication</a></b></h2>
+      <h4>Nicola Hensch</h4>
+    </header>
+    <div class="col-md-2 text-center">
+      <a href="https://www.instagram.com/nico_hensch/" class="fa fa-instagram"></a>
+    </div>  
+    <div class="col-md-2 text-center"> 
+      <h5><a href='./About/index copy.html'><br>About Me</a></h5>
+    </div>
+    <div class="col-md-2 text-center">
+      <h5><a href='./Final Project/Final index.html'><br>Final Project<br>&<br>Proposal</a></h5> 
+    </div>
+    <div class="col-md-2 text-center">
+       <h5><a href='https://nathanmelenbrink.github.io/intro-dig-fab/index.html'><br>Class Website</a></h5>
+    </div> 
+  </div> 
+  <h3>Week 3: Electronics & Tools</h3> <br> 
+  <div class="container-fluid">
+      <h4><b>Assignment</b></h4>
+      <ul>
+        <li>Make a circuit on a breadboard with components from the kit. Find voltage through certain points in the circuit and calculate the current.</li>
+        <li>Simulate your circuit on Tinkercad</li>
+        <li>Use the ADC to measure the voltage of a potentiometer, or other voltage-divider-based sensor.</li>
+      </ul> 
+    <div class="row">
+      <h5>Simple circuit</h5>
+      <p>For my breadboard circuit, I decided to try and make a circuit in parallel since I had read and learned about them but never actually created one. As seen in the photos below, rather than placing one resistor after another, which would make a series, I created two paths off of the first red wire. Each path had a different resistor, hence why the green LED is brighter than the blue one. I also created a simple schematic diagram of a circuit in parallel which is what I was trying to replicate. I tested the voltages through both LED's and saw that the blue LED, which is attached to the stronger resistor, had a higher voltage than the green lightbulb. At first I was a little confused by this but after consulting Ohm's Law, I realized that the lower voltage was due to the lower resistance since voltage is proportional to resistance if current is constant. The current through the first path is equal to 0.000245 amps and the current through the other path is 0.00235 amps.</p>
+     <img src="Schematic.jpeg" class="img-responsive margin" style="width:40%" alt="Schematic Diagram">
+    </div>
+    <div class="row"> 
+      <img src="Circuit 1-1.png" class="img-responsive margin" style="width:40%" style="height:40%" alt="Circuit with Voltage 1">
+      <img src="Circuit 2-1.png" class="img-responsive margin" style="width:40%" style="height:40%" alt="Circuit with Voltage 2">
+    </div>
+    <h5>Simulation</h5>
+    <p>I created a simulation of my circuit on Tinkercad, seen below. The resistors I used have the same resistance as my actual circuit, 10k ohms and 1k ohms, and I used orange and yellow wires to more clearly display the two seperate paths I created while trying to make a circuit in parallel.</p>
+    <img src="Simulation.png" class="img-responsive-margin" style="width:60%" alt="simulation">
+    <h5>Using an ADC</h5>
+    <p> In order to use the Microcontroller Analog In or ADC, I first had to build a circuit with a potentiometer. Although the circuit is very simple, it was something that I had never done before. While building the circuit, I learned that the potentiometer's three legs must all be connected to different ports in order to read any data. The left and right must introduce the power and the ground, essentially completing the circuit. The middle leg is used for the anolog in, which alows us to create the data through Arduino. Once the potentiometer and board are connected, I could connect the Metro M0 Express board with my computer. I then started up the basic program found under File > Examples > Basics > Analog Read Serial. I then adapted the code to convert the unitless data points into voltage. I needed the help of Professor Melenbrink, however, since I had never coded with C<sup>++</sup>. Below are photos of my circuit, the data being displayed, and the adapted code.</p>
+    <div class="row">  
+      <img src="Potentiometer-1.png" class="img-responsive-margin" style="width:20%" style="height:30%" alt="circuit">
+      <img src="Data.png" class="img-responsive-margin" style="width:40%" style="height:" alt="Data">
+      <img src="Code.png" class="img-responsive-margin" style="width:40%" style="height:40%" alt="Code">
+    </div>
+ 
+
+
+  </div>
+
+ 
+  
+  
+</div>
+
+</body>
+</html>
