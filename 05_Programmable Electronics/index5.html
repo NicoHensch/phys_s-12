@@ -13,8 +13,12 @@
      border-radius: 30px;    
     
   </style>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/arduino.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
-<body  style="background-color:lightgrey; font-family:Trebuchet MS,sans-serif;">
+<body  style="background-color:whitesmoke; font-family:Trebuchet MS,sans-serif;">
 
 <div class="container-fluid">
   <div class="row">
@@ -35,32 +39,94 @@
        <h5><a href='https://nathanmelenbrink.github.io/intro-dig-fab/index.html'><br>Class Website</a></h5>
     </div> 
   </div> 
-  <h3>Week 4: Rapid Prototyping</h3> <br> 
+  <h3>Week 5: Programmable Electronics</h3> <br> 
   <div class="container-fluid">
       <h4><b>Assignment</b></h4>
-      <p>Make and document either a kinetic sculpture or a quick prototype of a possible final project. Should include an electronic circuit with physical components from the kit as well as house-hold items.</p>
       <ul>
-        <li>Includes circuitry to move your sculpture</li>
-        <li>control the sculpture with a circuit on a breadboard that uses components in the kit like resistors and potentiometers. Measure the voltage and use Ohm's law to calculate the curerrent.</li>
-        <li>Document your work and include at least one gif/video.</li>
-      </ul> 
-    <div class="row">
-      <h4> Possible Final Project</h4>
-      <p>For this assignment I decided to try and make a very rough prototype of one of the many possible final project ideas I came up with. Although this is not one of the ideas I have listed on my Final Project tab, I decided to go with it anyway since I thought it was a more manageable idea. I had never prototyped anything before so I wanted to start off with something simple before diving into more complicated things. I decided I wanted to attempt to make a simple display structure that would rotate different objects, allowing for them to be seen from all angles. I began by making a simple circuit which is shown below, containing an LED and potentiometer. At first I wanted the LED to illuminate the onjects from below but I came to realize that the spinning platform, controlled by the potentiometer, would tangle the wires. After making the circuit, I measuered the voltage and resistance at different points within the circuit. I was unable to get a photo of myself measuring the voltages, but I attached a diagram of my circuit with the measurments and my calculations when trying to find the current below. I stuggled to find the resistance through the potentiometer, so I was only able to find the current through the lightbulb.</p>
-      <img src="Diagram2.png" class="img-responsive-margin" style="width:30%"  alt="Diagram">
-      <img src="Circuit.png" class="img-responsive-margin" style="width:30%"  alt="Circuit">
-      <p> In order to measure the voltage of the potentiometer as I rotated the knob, I adapted a simple code that I learned the previous week. It is an adaptaion of the Microcontroller Analog In, or ADC basic example which can be found beneath the file tab while using Arduino IDC. I changed the analogread integer and added the serial print function for both the sensor value and voltage. I was able to translate the sensor value to voltage by using the map function and correlating the sensorvalues to the voltage range. I repeated this map function but with a different range of sensorvalues because the code which dictates the motion/direction of the motor allows it to work in two directions. These directions are determined by sensor value ranges which are the same as I implemented in the map functions. The whole code, which also makes the motor run in both directions, is seen below.</p>
-      <img src="Code.png" class="img-responsive-margin" style="width:30%" alt="code">
-      <img src="Screenshot.png" class="img-responsive-margin" style="width:30%" alt="data">
-      <p> After creating my circuit and measuring the voltages within it, I put it into a small cardboard box I had in my house. This was a little difficult to do since the base of the box was a little too small to hold both the bread board and micro controller. Because of this I had to change the wiring of the circuit a little. The changes I made was providing longer cables to for ground and power to the bread board from the microcontroller and seperating the points of contact of the potentiometer circuit and LED circuit. After all the wiring was in place, I cut out small holes at the bottom sides of the box so that I could connect my USB cable to the microcontroller and control the potentiometer. I also cut a large hole through the top of the box for my motor. Looking back, I now realize that I made the hole too big which made the motor unstable while it was spinning. Because of this, I added a peice of cardboard with a hole the same size as the motor body, measurments I took with my calipers, to the top of the box. I wanted the hole to be the same size as the motor body since I knew that the cardboard is bendable and easily manipulated. This extra peice of cardboard is not shown below but will be seen in later photos.</p>
-      <img src="Circuit in box.png" class="img-responsive-margin" style="width:30%" alt="circuit in box">
-      <img src="Box top.png" class="img-responsive-margin" style="width:30%" alt="box top">
-      <p> Now that I had my motor all set, I just had to mount a platform. Although it sounded very simple, this step actually took me the longest to figure out. Before adding the small carboard layer to keep the motor secure, the motor would constantly seperate from the platform due to it's movement. I think I also had a problem with this step because of the tools I used to connect the two peices. I decidded to use electrical tape since it was the most easily available adhesive for me, but if I were to make another prototype I would have used something stronger like Duct Tape. In the photos you will also see small peices of cardboard attached to the bottom of the platform. These peices were meant to be bumpers to the top of the box, but they became useless when I lifted the motor with the cardboard layer as mentioned above. Below is a close up of the connection between the cardboard platform and the motor as well as the final product. As you can see, I moved the location of the LED to next to the potentiometer handle so it could serve as an indication to wether or not the contraption is powered. Havung done this prototype, I now realize how simple an idea this is for a final project. Although there are many ways I could make this better, I think that I am going to move away from this option for my final project.</p> 
-      <img src="Connection.png" class="img-responsive-margin" style="width:30%" alt="connection">
-      <img src="Final.png" class="img-responsive-margin" style="width:30%" alt="final">
-      <video controls>
-        <source width="320" height="240" src="Video.mp4" type="video">
-      </video>
+        <li>Program a microcontroller to produce an output using at least one button for input. Include a conditional statement and a for() loop.</li>
+        <li>Think about your final project and any additional components you might want. Start working on the 3D design for your project, especially components you might want to be lasercut or 3D printed. We can't make any promises, but we will do our best to accommodate requests within reason. Next Tuesday the 13th is the deadline for requests, in order for us to print/cut, mail, and get to you in time for you to assemble your project. (This will also be your assignment for next class). Please feel free to send us your designs prior to that for feedback. Please also feel free to use models from this collection of 3D models of kit components, or from other online collections like grabcad.com or Thingiverse.</li>
+      </ul>
+
+      <h4>My Program</h4>
+      <p>For this assignment, I decided to try and make an LED get brighter and then dimmer while a button is pressed, and when the button is unpressed, make another LED continuosly brighten and dim. I began by using the example code we worked on during the lab session on Wednesday, the 7th.</p>  
+        <pre><code class="language-arduino"> 
+          int buttonPin = 2;
+          int ledPin = 13;
+
+
+          void setup() {
+              // put your setup code here, to run once:
+              pinMode(buttonPin, INPUT_PULLUP);
+
+          }
+
+          void loop() {
+              // put your main code here, to run repeatedly:
+              if  (digitalRead(buttonPin) == LOW) {
+
+          //for (inti; test; update);
+          for (int i = 225; i >= 0; i--) {
+            analogWrite(ledPin, i);
+            delay(10);
+
+            }
+
+          }
+        }
+      </code></pre>
+      <p> The first adaptaion I made was to the original for() loop values. I changed them to <code> for(int i = 0; i <= 255; i++) </code>. I left the analogWrite and delay functions the same. This adapted for() loop makes the built-in led get brighter after a single button press. Once I had the brightening process figuered out, I then worked on trying to dim the LED. At first I thought that I had to use an } else{ function since I had used an if statement before hand. After talking to Victoria and getting some help from Faraz, I learned that I did not have to since I wanted the dimming process to occur in the same loop as the brightening function. The new code I added is actually the same as what I had in the original code which was <pre><code class="language-arduino"> 
+        for (int i = 225; i >= 0; i--) {
+          analogWrite(ledPin, i);
+          delay(10);
+        }
+      </code></pre> This gave me a complete brightening and dimming cycles for the bult-in LED. I then copied and pasted both of the for loops in front of the if statment so I could control anoter, external, LED. This Green LED was defined at the top of my code and was connected to pin 10. Because I created new for() loops for the new LED, I had to change the term variables. I changed them from "i" to "g" since the code was for the green LED. Below is all of my code, a photo of my circuit, and a video as well.</p>
+      <pre><code class="language-arduino hljs">
+        int buttonPin = 2;
+        int ledPin = 13;
+        int ledGreen = 10;
+
+        void setup() {
+          // put your setup code here, to run once:
+          pinMode(buttonPin, INPUT_PULLUP);
+          pinMode(ledGreen, OUTPUT);
+        }
+
+        void loop() {
+          // put your main code here, to run repeatedly:
+          // light cycle for the green LED.
+          for (int g = 0; g <= 225; g++) {
+            analogWrite(ledGreen, g);
+            delay(10);
+          }
+          for (int g = 225; g >= 0; g--) {
+            analogWrite(ledGreen, g);
+            delay(10);
+          }
+          //light cycle for the built in LED that starts only when the button is pressed. 
+          if (digitalRead(buttonPin) == LOW) {
+            Serial.println(digitalRead(buttonPin));
+            //for (inti; test; update);
+            for (int i = 0; i <= 225; i++) {
+              analogWrite(ledPin, i);
+              delay(10);
+            }
+            for (int i = 225; i >= 0; i--) {
+              analogWrite(ledPin, i);
+              delay(10);
+            }
+          }
+        }
+      </code></pre>
+      <div class="col-md-12">
+        <img src="Circuit2.png" class="img-responsive-margin" style="width:30%"  alt="Circuit">
+        <video width="500" height="420" controls>
+          <source src="05_Video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+
+
+
  
 
 
