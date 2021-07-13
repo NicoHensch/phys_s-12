@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PHYS S-12: Intro to Digital Fabrication </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+  <link href="../style.css" rel="stylesheet">
+  <style>
+   img {
+     border-radius: 30px;    
+    
+  </style>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/arduino.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body  style="background-color:whitesmoke; font-family:Trebuchet MS,sans-serif;">
+
+<div class="container-fluid">
+  <div class="row">
+    <header class="col-md-4">
+      <h2><b><a href='../index.html'>PHYS S-12: Introduction to Digital Fabrication</a></b></h2>
+      <h4>Nicola Hensch</h4>
+    </header>
+    <div class="col-md-2 text-center">
+      <a href="https://www.instagram.com/nico_hensch/" class="fa fa-instagram"></a>
+    </div>  
+    <div class="col-md-2 text-center"> 
+      <h5><a href='./About/index copy.html'><br>About Me</a></h5>
+    </div>
+    <div class="col-md-2 text-center">
+      <h5><a href='./Final Project/Final index.html'><br>Final Project<br>&<br>Proposal</a></h5> 
+    </div>
+    <div class="col-md-2 text-center">
+       <h5><a href='https://nathanmelenbrink.github.io/intro-dig-fab/index.html'><br>Class Website</a></h5>
+    </div> 
+  </div> 
+  <h3>Week 6: 3D Design & Printing</h3> <br> 
+  <div class="container-fluid">
+      <h4><b>Assignment</b></h4>
+      <ul>
+        <li>Design and prepare a small object that either a. is for your final prject or b. can not be made easily using subtractive methods. Document your work using stl, gcode, and f3z files. </li>
+        <li>Scan something using a photogametry application, if possible.</li>
+      </ul>
+
+      <h4>My Design</h4>
+      <p>When I first looked at this assignment, I was not too sure what I was being asked to do. But after taliking to Victoria, I understood that I had to design a 3D object that would be difficult to replicate without using a 3D printer. The first thing that came to mind was making nested objects that would be impossible to put together if they were not built at the same time. Since I am still learning how to use Fusion 360, I decided to try and create a random 3D object with techniques I had never used before. After thinking about what to do for a little while, I landed on the idea of making two dodecahedrons, one inside the other. I started off with a sketch of a pentagon, radius of 50 mm, and then made an inner pentagon with a radius of 40 mm. Next, I used the Surface patch tool to make it a body. I then copied the body and rotated it about one of the original sides, 116.6 degrees, and then used the circular pattern tool on the new panel to create the lower half of the dodecahedron with 5 sides, using the origin as the axis of rotation. I used the copy tool again to make the upper half, flipping it 180 degrees, in order to orient it properly. I then rotated it 36 degrees to line up the two halves, and then the point to point movement tool to connect them. I stitched them together, forming a single object and then used the thicken tool to make it a real 3D object that a 3D printer could make. Below are screenshots of each step I took. After having created the outer dodecahedron, I repeated the same steps but with a singular pentagon with a radius of 35 mm as the original sketch. This created a small filled in dodecahedron that fits inside of the larger one, but can not be taken out of it. I was able to discover all of these new techniques thanks to the help of a youtube tutorial which taught me how to use the move/copy tool and the path tool. I found all of the angles of rotation on the internet.</p>
+      <div class="row">
+        <img src="Step 1.png" class="img-responsive-margin" style="width:25%" alt="Step 1">
+        <img src="step 2.png" class="img-responsive-margin" style="width:25%" alt="Step 2">
+        <img src="step 3.png" class="img-responsive-margin" style="width:25%" alt="Step 3">
+        <img src="Step 4.png" class="img-responsive-margin" style="width:25%" alt="Step 4">
+        <iframe style="width:50%; height:300px; " src="https://www.youtube.com/watch?v=w0LZnZY-Pe8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe style="width:50%; height:300px; " src="https://www.youtube.com/watch?v=ZmE-pWmrNE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <p>Once I had created the object in Fusion 360, I exported each body as an .stl file into the Kiri:Moto 3D printer grid space. I decided to use Kiri Moto because my computer's storage is getting full and I did not want to have to download any new programs. All in all my experience with Kiri Moto was quite good. It was simple and easy to use which was nice for a newby 3D printer like me. Once my bodies were in the grid space, I positioned them properly, one inside the other, and used the slice function to see what the printing process would look like. I added my supports and then exported my slicing gcode. Below is a look at my final object in Fusion 360, a screenshot of my project being sliced (hard to see the inner dodecahedron due to supports), and downloadable links for each body as well as my gcode. <b>I do not have a 3D printer so I was unable to actually print my object.</b></p>
+      <iframe src="https://a360.co/3ebs9RO" title="Double-Dodecahedron" class="col-md-12" height="600"></iframe>
+      <img src="3D slicer.png" class="img-responsive-margin" style="width:50%" alt="3D Render"><br>
+      <a download href='./Inner Dodecahedron 2.stl'>Download my Inner Dodecahedron</a><br>
+      <a download href='./Outer Dodecahedron 2.stl'>Download my Outer Dodecahedron</a><br>
+      <a download href='./Double-Dodecahedron 2.gcode'>Download my slicer gcode(includes supports)</a><br>
+      <a download href='./3D print assignment v2.f3d'>Download my Fusion 360 f3d file</a>     
+
+        
+      
+
+
+
+
+ 
+
+
+  </div>
+
+ 
+  
+  
+</div>
+
+</body>
+</html>
