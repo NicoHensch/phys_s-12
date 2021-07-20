@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PHYS S-12: Intro to Digital Fabrication </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+  <link href="../style.css" rel="stylesheet">
+  <style>
+   img {
+     border-radius: 10px;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;    
+   } 
+  </style>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/arduino.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body  style="background-color:whitesmoke; font-family:Trebuchet MS,sans-serif;">
+
+<div class="container-fluid">
+  <div class="row">
+    <header class="col-md-4">
+      <h2><b><a href='../index.html'>PHYS S-12: Introduction to Digital Fabrication</a></b></h2>
+      <h4>Nicola Hensch</h4>
+    </header>
+    <div class="col-md-2 text-center">
+      <a href="https://www.instagram.com/nico_hensch/" class="fa fa-instagram"></a>
+    </div>  
+    <div class="col-md-2 text-center"> 
+      <h5><a href='./About/index copy.html'><br>About Me</a></h5>
+    </div>
+    <div class="col-md-2 text-center">
+      <h5><a href='./Final Project/Final index.html'><br>Final Project<br>&<br>Proposal</a></h5> 
+    </div>
+    <div class="col-md-2 text-center">
+       <h5><a href='https://nathanmelenbrink.github.io/intro-dig-fab/index.html'><br>Class Website</a></h5>
+    </div> 
+  </div> 
+  <h3>Week 8: Electronic Output devices</h3> <br> 
+  <div class="container-fluid">
+      <h4><b>Assignment</b></h4>
+      <ul>
+        <li> Use an output device that you haven't used before.</li>
+        <li> Write a microcontroller program that integrates at least one input device and one output device. Avoid the delay() function by using either timers or interrupts.</li>
+      </ul>
+
+      <h4>LED Strip and Buttons</h4>
+      <p>For my project for this assignment, I decided to try and combine the two requierments. The new output device that I tried to learn was the LED strip and I combined it with buttons. After running through the LED strip intorduction course, which can be found on the course website and here, I started thinking of things I could do with it. At first I wanted to use buttons to make a passcode, that when correct, would make the LED strip light up green, and red when the code was wrong. Sadly, when I started trying to make this idea a reality, I realized that it was more difficult than anticipated due to my lack of coding knowledge. However, while researching the idea and talking to Professor Melenbrink, I learned that this idea would require button states, so rather than scraping the idea etirely I decided to attempt to learn more about button states and incorporate them into my project. I landed on the idea of making simple two button combinations, rather than one of five, that made different pixels light up differently depending on the order. I started off by wiring up my circuit with 5 Pull-up buttons, beginning with pin 13 and ending at pin 9. I then wired my lED strip to pin 6, ground, and directly to 5V.</p>
+      <img src="IMG_5126.png" class="img-responsive-margin" style="width:30%" alt="circuit">
+      <p> While lerning more about button combinations, I stumbled onto an old arduino forum, linked here, that helped give me some guidance and structure to my code. In the forum, they talk about using the switch/case function which is similar to the class style we went over during lab. At first, I just tried using this new style/format with the first two buttons and then eventually expanded it to the other 3. The first case that I have, pretty much is the starting point of the combination. It says that when a button it pressed, the state changes and tells it to move to another specific case to finsih hte combination. Each button in the firt case uses an <code>if()</code> function. Here is an example:
+        <pre><code>
+          case waitingForAnyButton:
+      if (digitalRead(button1) == LOW)
+      {
+        currentState =  waitingForButton2;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 2");
+      }
+    </code></pre>
+          Once I had all of the first steps of the buttons done, I followed the forums pattern and created the next case. I had to create a different case for each button combination which placed a time limit using the <code> millis()</code> function and also had the final light up sequence within it.
+          <pre><code>
+case waitingForButton2:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button2) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(2, strip.Color(188, 143, 143));
+        strip.setPixelColor(3, strip.Color(188, 143, 143));
+      }
+      break;
+    </code></pre>
+           The code for lighting up specific LED pixels can be found on the course website. These second cases all pushed to a singular, final case that simply made the light stay on for 2 seconds and then print "buttons pressed" to the serial monitor. Here is my final code and a video displaying the project in action.</p> 
+    <pre><code>
+      #include <Adafruit_NeoPixel.h>
+
+#define PIN        6
+#define NUMPIXELS 10
+
+
+Adafruit_NeoPixel strip(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+const int button1 = 13;
+const int button2 = 12;
+const int button3 = 11;
+const int button4 = 10;
+const int button5 = 9;
+unsigned long waitStart;
+unsigned long currentMillis;
+unsigned long period = 5000;
+
+const byte waitingForAnyButton = 0;
+const byte waitingForButton2 = 1;
+const byte waitingForButton1 = 2;
+const byte waitingForButton3 = 4;
+const byte waitingForButton4 = 5;
+const byte waitingForButton5 = 6;
+const byte bothButtonsPressed = 3;
+const byte ButtonsPressed = 7;
+
+byte currentState = waitingForAnyButton;
+
+void setup() {
+  // put your setup code here, to run once:
+  strip.begin();
+  strip.show();
+  strip.setBrightness(10);
+  Serial.begin(115200);
+  Serial.println("Waiting for a button press");
+  pinMode (button1, INPUT_PULLUP);
+  pinMode (button2, INPUT_PULLUP);
+  pinMode (button3, INPUT_PULLUP);
+  pinMode (button4, INPUT_PULLUP);
+  pinMode (button5, INPUT_PULLUP);
+}
+
+void loop() {
+  strip.clear();
+  // put your main code here, to run repeatedly:
+  currentMillis = millis();
+  switch (currentState)
+  {
+    case waitingForAnyButton:
+      if (digitalRead(button1) == LOW)
+      {
+        currentState =  waitingForButton2;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 2");
+      }
+
+      if (digitalRead(button2) == LOW)
+      {
+        currentState =  waitingForButton1;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 1");
+      }
+      if (digitalRead(button3) == LOW)
+      {
+        currentState =  waitingForButton4;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 4");
+      }
+
+      if (digitalRead(button4) == LOW)
+      {
+        currentState =  waitingForButton5;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 5");
+      }
+      if (digitalRead(button5) == LOW)
+      {
+        currentState =  waitingForButton3;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 3");
+      }
+      break;
+    //
+    case waitingForButton2:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button2) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(2, strip.Color(188, 143, 143));
+        strip.setPixelColor(3, strip.Color(188, 143, 143));
+      }
+      break;
+    //
+    case waitingForButton1:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button1) == LOW)
+      {
+       currentState = ButtonsPressed;
+       strip.setPixelColor(0, strip.Color(150, 0, 150));
+       strip.setPixelColor(1, strip.Color(150, 0, 150));
+      }
+      break;
+    //
+ 
+    case waitingForButton3:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for either button");
+      }
+      if (digitalRead(button3) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(4, strip.Color(150, 0, 0));
+        strip.setPixelColor(5, strip.Color(150, 0, 0));
+      }
+      break;
+    //
+    case waitingForButton4:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button4) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(6, strip.Color(0, 150, 150));
+        strip.setPixelColor(7, strip.Color(0, 150, 150));
+      }
+      break;
+    //
+    case waitingForButton5:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button5) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(8, strip.Color(0, 150, 0));
+        strip.setPixelColor(9, strip.Color(0, 150, 0));
+      }
+      break;
+    //
+    case ButtonsPressed:
+      Serial.println("buttons pressed in time");
+      delay(2000);
+      Serial.println("Waiting for any button");
+      currentState = waitingForAnyButton;
+      break;
+  }
+  strip.show();
+
+}
+    </code></pre>
+    <video width="500" height="420" controls>
+        <source src="LEDMovie.mp4" type="video/mp4">
+      </video>
+        
+      
+
+
+
+
+ 
+
+
+  </div>
+
+ 
+  
+  
+</div>
+
+</body>
+</html>
