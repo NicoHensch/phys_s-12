@@ -96,6 +96,7 @@
 
   function speed(){
     console.log("changing speed")
+    console.log(document.getElementById('rangeinput').value)
     ref.update({
       "MOTOR_SPEED": document.getElementById('rangeinput').value
     }) 
