@@ -46,11 +46,97 @@
   <div class="container-fluid">
       <h4><b>Assignment</b></h4>
       <ul>
-        <li><a href="./Firebase copy.html">Link</a></li>
         <li>Control a board from a local wireless network. Program a microcontroller to obtain and respond to information from the internet. Optionally, work with a partner to control a device over a remote server.</li>
       </ul>
       <h4>Motor Controls</h4>
-      <p> For this assignment, I decided to try and work on my final project, an RC car. After working through the basic examples on how to use local networks, I decided to try and use the Google firebase application to make a website that would control the speed, direction, and power of my car. For now, I just tried to get the website to turn on a single DC motor and make a slider that controls the speed and irection like a potentiometer would. I started off by following the tutorial on google firebase that can be found on the class website. Once I was able to control an LED from the Realtime database, I started working on creating a webpage, similar to the one Professor Melenbrink had. This was quite difficult for me since the steps on the class website were a bit unclear in my opinion. Once I had copied and made a new html file, I moved it into this weeks folder on Sublime text. I then adapted the code with the web generated configuration variables after I had finished following all of the steps on Firebase. Once I knew that the buttons continued to work to turn on and off my LED, I then wired up a DC motor to my ESP32 Huzzah. I used pins 4 and 5 for the A1-A and A1-B motor driver ports and 3V instead of 5 since there is no 5v option for ESP32 boards. 
+      <p> For this assignment, I decided to try and work on my final project, an RC car. After working through the basic examples on how to use local networks, I decided to try and use the Google firebase application to make a website that would control the speed, direction, and power of my car. For now, I just tried to get the website to turn on a single DC motor and make a slider that controls the speed and drection like a potentiometer would. I started off by following the tutorial on google firebase that can be found on the class website. Once I was able to control an LED from the Realtime database, I started working on creating a webpage, similar to the one Professor Melenbrink had. This was quite difficult for me since the steps on the class website were a bit unclear in my opinion. Once I had copied the code and made a new html file, I moved it into this weeks folder on Sublime text. I then adapted the code with the web generated configuration variables after I had finished following all of the steps on Firebase. The webpage can be found <a href="./Firebase copy.html">here</a>. Once I knew that the buttons continued to work to turn on and off my LED, I then wired up a DC motor to my ESP32 Huzzah. I used pins 4 and 5 for the A1-A and A1-B motor driver ports and 3V instead of 5 since there is no 5v option for ESP32 boards.</p>
+      <img src="IMG_5132.png" class="img-responsive-margin" style="width:30%" alt="circuit">
+      <p>With the motor now turning on according to the buttons, I then added a slider to my html code. I also added these lines of code <code>document.getElementById('rangeinput').addEventListener('change', speed, false);</code>, <pre><code>
+        function speed(){
+    console.log("changing speed")
+    console.log(document.getElementById('rangeinput').value)
+    ref.update({
+      "MOTOR_SPEED": document.getElementById('rangeinput').value
+    }) 
+  } 
+</code></pre> in order to add a slider variable to firebase. This vairable would get updated everytime the slider was moved and would be called up by the added arduino code when dons so. My code, seen below, uses <code>ledcWrite</code> to control the direction and speed of the motor since<code>analogWrite</code> does not work with the esp32 board. This arduino code is a copy of the one found on the couser website, but I changed variable names and added if statements within the loop function that helped control the slider along with the buttons.</p>
+<pre><code>
+#include WiFi.h>                                 // esp32 library
+#include FirebaseESP32.h>                        // firebase library
+
+#define FIREBASE_HOST "https://esp32-car-default-rtdb.firebaseio.com/"  // the project name address from firebase id
+#define FIREBASE_AUTH "Yours"                          // the secret key generated from firebase
+#define WIFI_SSID "yours"                                // input your home or public wifi name
+#define WIFI_PASSWORD "yours"                            // password of wifi ssid
+
+String fireString = "";// led status received from firebase
+int fireInt = 512;
+const int A1A = 4;// or use the builtin LED on pin 13
+const int A1B = 5;
+const int Channel = 0;
+//Define FirebaseESP32 data object
+FirebaseData firebaseData;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  pinMode(A1A, OUTPUT);
+  pinMode(A1B, OUTPUT);
+  digitalWrite(A1B, LOW);
+  
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);                          // try to connect with wifi
+
+  Serial.print("Connecting to ");
+  Serial.print(WIFI_SSID);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println();
+  Serial.print("Connected to ");
+  Serial.println(WIFI_SSID);
+  Serial.print("IP Address is : ");
+  Serial.println(WiFi.localIP());                                // print local IP address
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);                  // connect to firebase
+  Firebase.reconnectWiFi(true);
+  //Firebase.set(firebaseData, "/MOTOR_STATUS", "OFF");// set initial string of "OFF"
+  ledcAttachPin(A1A, Channel);              
+}
+  
+void loop() {
+
+  Firebase.get(firebaseData, "/MOTOR_STATUS");// get led status input from firebase
+  fireString = firebaseData.stringData(); // change to e.g. intData() or boolData()
+  Serial.println(fireString);
+  Firebase.get(firebaseData, "/MOTOR_SPEED");
+  fireInt = firebaseData.intData();
+  Serial.println(fireInt);
+
+
+  if (fireString == "ON") {                    // compare the input of led status received from firebase
+    Serial.println("Motor Turned ON");
+    digitalWrite(A1B, HIGH);                // make output led ON
+  }
+
+  else if (fireString == "OFF") {              // compare the input of led status received from firebase
+    Serial.println("Motor Turned OFF");
+    digitalWrite(A1B, LOW);                 // make output led OFF
+  }
+
+  else {
+    Serial.println("Please send ON/OFF");
+  }
+  if (fireInt > 512) {
+    Serial.println("Forward");
+    ledcWrite(Channel, 50);
+  }
+  else if (fireInt < 512) {
+    Serial.println("Backward");
+    ledcWrite(Channel, 255-50);
+  }
+}
+</code></pre> 
 
 </body>
 </html>
