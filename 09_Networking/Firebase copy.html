@@ -1,95 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2022.44">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Monaco; color: #1d2326; -webkit-text-stroke: #1d2326}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Monaco; color: #166265; -webkit-text-stroke: #166265}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Monaco; color: #0d2c2d; -webkit-text-stroke: #0d2c2d}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Monaco; color: #5d6f70; color: rgba(93, 111, 112, 0.8); -webkit-text-stroke: rgba(93, 111, 112, 0.8)}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Monaco; color: #1d2326; -webkit-text-stroke: #1d2326; min-height: 19.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font-kerning: none; color: #166265; -webkit-text-stroke: 0px #166265}
-    span.s3 {font-kerning: none; color: #0d2c2d; -webkit-text-stroke: 0px #0d2c2d}
-    span.s4 {font-kerning: none; color: #1d2326; -webkit-text-stroke: 0px #1d2326}
-    span.s5 {font-kerning: none; background-color: #ffffff}
-    span.s6 {font-kerning: none; color: #1d2326; background-color: #ffffff; -webkit-text-stroke: 0px #1d2326}
-    span.s7 {font-kerning: none; color: #a7190b; -webkit-text-stroke: 0px #a7190b}
-    span.s8 {font-kerning: none; color: #3e5c08; -webkit-text-stroke: 0px #3e5c08}
-    span.s9 {font-kerning: none; color: #4a0006; -webkit-text-stroke: 0px #4a0006}
-    span.Apple-tab-span {white-space:pre}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHYSCI 70: Introduction to Digital Fabrication</title>
+  <style>
+  .slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+</style>
 </head>
+ 
 <body>
-<p class="p1"><span class="s1">&lt;!doctype html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;</span><span class="s2">html</span><span class="s1"> class=</span><span class="s3">"no-js"</span><span class="s1"> lang=</span><span class="s3">"en"</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s4">&lt;</span><span class="s1">head</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s5"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;</span><span class="s2">meta</span><span class="s1"> charset=</span><span class="s3">"utf-8"</span><span class="s1"> /&gt;</span></p>
-<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s4">&lt;</span><span class="s2">meta</span><span class="s4"> name=</span><span class="s1">"viewport"</span><span class="s4"> content=</span><span class="s1">"width=device-width, initial-scale=1.0"</span><span class="s4"> /&gt;</span></p>
-<p class="p1"><span class="s5"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;</span><span class="s2">title</span><span class="s1">&gt;</span><span class="s5">PHYSCI 70: Introduction to Digital Fabrication</span><span class="s1">&lt;/</span><span class="s2">title</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s4">&lt;/</span><span class="s1">head</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p2"><span class="s4">&lt;</span><span class="s1">body</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s5"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;</span><span class="s2">button</span><span class="s1"> id=</span><span class="s3">"turn-on"</span><span class="s1"> name=</span><span class="s3">"turnon"</span><span class="s1">&gt;</span><span class="s5">Turn On </span><span class="s1">&lt;/</span><span class="s2">button</span><span class="s1">&gt;</span></p>
-<p class="p1"><span class="s5"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;</span><span class="s2">button</span><span class="s1"> id=</span><span class="s3">"turn-off"</span><span class="s1"> name=</span><span class="s3">"turnoff"</span><span class="s1">&gt;</span><span class="s5">Turn Off </span><span class="s1">&lt;/</span><span class="s2">button</span><span class="s1">&gt;</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p4"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;!-- The core Firebase JS SDK is always required and must be listed first --&gt;</span></p>
-<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s4">&lt;</span><span class="s2">script</span><span class="s4"> src=</span><span class="s1">"https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"</span><span class="s4">&gt;&lt;/</span><span class="s2">script</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p4"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s1">&lt;!-- </span><span class="s2">TODO:</span><span class="s1"> Add SDKs for Firebase products that you want to use</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>https://firebase.google.com/docs/web/setup#available-libraries --&gt;</span></p>
-<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s4">&lt;</span><span class="s2">script</span><span class="s4"> src=</span><span class="s1">"https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"</span><span class="s4">&gt;&lt;/</span><span class="s2">script</span><span class="s4">&gt;</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p2"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s4">&lt;</span><span class="s1">script</span><span class="s4">&gt;</span></p>
-<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">// Your web app's Firebase configuration</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2">var</span><span class="s1"> firebaseConfig = {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>apiKey: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>authDomain: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>databaseURL: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>projectId: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>storageBucket: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>messagingSenderId: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>appId: </span><span class="s1">"REPLACE_WITH_YOUR_OWN"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>};</span></p>
-<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">// Initialize Firebase</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>firebase.initializeApp(firebaseConfig);</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">// Get a database reference to our blog</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2">var</span><span class="s1"> ref = firebase.database().ref(</span><span class="s3">"/"</span><span class="s1">);</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">// make the buttons call the function below<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s7">document</span><span class="s1">.getElementById(</span><span class="s3">'turn-on'</span><span class="s1">).addEventListener(</span><span class="s3">'click'</span><span class="s1">, turnOn, </span><span class="s7">false</span><span class="s1">);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s7">document</span><span class="s1">.getElementById(</span><span class="s3">'turn-off'</span><span class="s1">).addEventListener(</span><span class="s3">'click'</span><span class="s1">, turnOff, </span><span class="s7">false</span><span class="s1">);</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p2"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">function</span><span class="s8"> </span><span class="s9">turnOn</span><span class="s8">()</span><span class="s4">{</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s7">console</span><span class="s4">.log(</span><span class="s1">"turning on"</span><span class="s4">);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ref.update({</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s1">"LED_STATUS"</span><span class="s4">: </span><span class="s1">"ON"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p2"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s1">function</span><span class="s8"> </span><span class="s9">turnOff</span><span class="s8">()</span><span class="s4">{</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s7">console</span><span class="s4">.log(</span><span class="s1">"turning off"</span><span class="s4">);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ref.update({</span></p>
-<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s1">"LED_STATUS"</span><span class="s4">: </span><span class="s1">"OFF"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>}<span class="Apple-tab-span">	</span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/</span><span class="s2">script</span><span class="s1">&gt;</span></p>
-<p class="p1"><span class="s1"><br>
-</span></p>
-<p class="p2"><span class="s4">&lt;/</span><span class="s1">body</span><span class="s4">&gt;</span></p>
+  <button id="turn-on" name="turnon">Turn On </button>
+  <button id="turn-off" name="turnoff">Turn Off </button>
+  <div class="slidecontainer">
+    <p>Default range slider:</p>
+    <input type="range" id="rangeinput" min="0" max="1023" value="512">
+  </div>
+ 
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+ 
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+ 
+  <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDF0dJ_C3XakybiywE8VBlb2aZphLFELEQ",
+    authDomain: "esp32-car.firebaseapp.com",
+    databaseURL: "https://esp32-car-default-rtdb.firebaseio.com",
+    projectId: "esp32-car",
+    storageBucket: "esp32-car.appspot.com",
+    messagingSenderId: "243106544128",
+    appId: "1:243106544128:web:97b6506a19d93663c336e5"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ 
+  // Get a database reference to our blog
+  var ref = firebase.database().ref("/");
+ 
+  // make the buttons call the function below 
+  document.getElementById('turn-on').addEventListener('click', turnOn, false);
+  document.getElementById('turn-off').addEventListener('click', turnOff, false);
+  document.getElementById('rangeinput').addEventListener('change', speed, false);
+ 
+  function turnOn(){
+    console.log("turning on");
+    ref.update({
+      "MOTOR_STATUS": "ON"
+    });
+  }
+ 
+  function turnOff(){
+    console.log("turning off");
+    ref.update({
+      "MOTOR_STATUS": "OFF"
+    });
+  }
+
+  function speed(){
+    console.log("changing speed")
+    ref.update({
+      "MOTOR_SPEED": document.getElementById('rangeinput').value
+    }) 
+  } 
+    </script>
+ 
 </body>
-</html>
