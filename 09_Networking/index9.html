@@ -42,7 +42,7 @@
        <h5><a href='https://nathanmelenbrink.github.io/intro-dig-fab/index.html'><br>Class Website</a></h5>
     </div> 
   </div> 
-  <h3>Week 8: Electronic Output devices</h3> <br> 
+  <h3>Week 9: Networking /IoT</h3> <br> 
   <div class="container-fluid">
       <h4><b>Assignment</b></h4>
       <ul>
@@ -51,7 +51,7 @@
       <h4>Motor Controls</h4>
       <p> For this assignment, I decided to try and work on my final project, an RC car. After working through the basic examples on how to use local networks, I decided to try and use the Google firebase application to make a website that would control the speed, direction, and power of my car. For now, I just tried to get the website to turn on a single DC motor and make a slider that controls the speed and drection like a potentiometer would. I started off by following the tutorial on google firebase that can be found on the class website. Once I was able to control an LED from the Realtime database, I started working on creating a webpage, similar to the one Professor Melenbrink had. This was quite difficult for me since the steps on the class website were a bit unclear in my opinion. Once I had copied the code and made a new html file, I moved it into this weeks folder on Sublime text. I then adapted the code with the web generated configuration variables after I had finished following all of the steps on Firebase. The webpage can be found <a href="./Firebase copy.html">here</a>. Once I knew that the buttons continued to work to turn on and off my LED, I then wired up a DC motor to my ESP32 Huzzah. I used pins 4 and 5 for the A1-A and A1-B motor driver ports and 3V instead of 5 since there is no 5v option for ESP32 boards.</p>
       <img src="IMG_5132.png" class="img-responsive-margin" style="width:30%" alt="circuit">
-      <p>With the motor now turning on according to the buttons, I then added a slider to my html code. I also added these lines of code <code>document.getElementById('rangeinput').addEventListener('change', speed, false);</code>, <pre><code>
+      <p>With the motor now turning on, I added a slider to my html code. I also added these lines of code <code>document.getElementById('rangeinput').addEventListener('change', speed, false);</code> and <pre><code>
         function speed(){
     console.log("changing speed")
     console.log(document.getElementById('rangeinput').value)
@@ -137,6 +137,6 @@ void loop() {
   }
 }
 </code></pre> 
-
+<p> Sadly, I did not have enough time to code the slider to control the speed as well as the direction of the motor. My code only works to determine the direction of the motor. 
 </body>
 </html>
