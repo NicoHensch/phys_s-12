@@ -1,0 +1,70 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red52\green62\blue66;\red255\green255\blue255;\red17\green134\blue139;
+\red9\green74\blue76;\red131\green148\blue149;\red199\green63\blue5;\red96\green126\blue3;\red115\green0\blue2;
+}
+{\*\expandedcolortbl;;\cssrgb\c26275\c30980\c32941;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c59216\c61569;
+\cssrgb\c0\c36078\c37255;\cssrgb\c58431\c64706\c65098\c80000;\cssrgb\c82745\c32941\c0;\cssrgb\c44706\c55686\c0;\cssrgb\c53333\c0\c0;
+}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \expnd0\expndtw0\kerning0
+<!doctype html>\cb3 \
+\cb1 <\cf4 html\cf2  class=\cf5 "no-js"\cf2  lang=\cf5 "en"\cf2 >\cb3 \
+\cb1 <\cf4 head\cf2 >\cb3 \
+	\cb1 <\cf4 meta\cf2  charset=\cf5 "utf-8"\cf2  />\cb3 \
+	\cb1 <\cf4 meta\cf2  name=\cf5 "viewport"\cf2  content=\cf5 "width=device-width, initial-scale=1.0"\cf2  />\cb3 \
+	\cb1 <\cf4 title\cf2 >\cb3 PHYSCI 70: Introduction to Digital Fabrication\cb1 </\cf4 title\cf2 >\cb3 \
+\cb1 </\cf4 head\cf2 >\cb3 \
+\
+\cb1 <\cf4 body\cf2 >\cb3 \
+	\cb1 <\cf4 button\cf2  id=\cf5 "turn-on"\cf2  name=\cf5 "turnon"\cf2 >\cb3 Turn On \cb1 </\cf4 button\cf2 >\cb3 \
+	\cb1 <\cf4 button\cf2  id=\cf5 "turn-off"\cf2  name=\cf5 "turnoff"\cf2 >\cb3 Turn Off \cb1 </\cf4 button\cf2 >\cb3 \
+\
+	\cf6 \cb1 <!-- The core Firebase JS SDK is always required and must be listed first -->\cf2 \cb3 \
+	\cb1 <\cf4 script\cf2  src=\cf5 "https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"\cf2 ></\cf4 script\cf2 >\cb3 \
+\
+	\cf6 \cb1 <!-- \cf4 TODO:\cf6  Add SDKs for Firebase products that you want to use\
+	     https://firebase.google.com/docs/web/setup#available-libraries -->\cf2 \cb3 \
+	\cb1 <\cf4 script\cf2  src=\cf5 "https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"\cf2 ></\cf4 script\cf2 >\cb3 \
+\
+	\cb1 <\cf4 script\cf2 >\
+	\cf6 // Your web app's Firebase configuration\cf2 \
+	\cf4 var\cf2  firebaseConfig = \{\
+		apiKey: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		authDomain: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		databaseURL: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		projectId: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		storageBucket: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		messagingSenderId: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 ,\
+		appId: \cf5 "REPLACE_WITH_YOUR_OWN"\cf2 \
+	\};\
+	\
+	\cf6 // Initialize Firebase\cf2 \
+	firebase.initializeApp(firebaseConfig);\
+\
+	\cf6 // Get a database reference to our blog\cf2 \
+	\cf4 var\cf2  ref = firebase.database().ref(\cf5 "/"\cf2 );\
+\
+	\cf6 // make the buttons call the function below \cf2 \
+	\cf7 document\cf2 .getElementById(\cf5 'turn-on'\cf2 ).addEventListener(\cf5 'click'\cf2 , turnOn, \cf7 false\cf2 );\
+	\cf7 document\cf2 .getElementById(\cf5 'turn-off'\cf2 ).addEventListener(\cf5 'click'\cf2 , turnOff, \cf7 false\cf2 );\
+\
+	\cf4 function\cf8  \cf9 turnOn\cf8 ()\cf2 \{\
+		\cf7 console\cf2 .log(\cf5 "turning on"\cf2 );\
+		ref.update(\{\
+			\cf5 "LED_STATUS"\cf2 : \cf5 "ON"\cf2 \
+		\});\
+	\}\
+\
+	\cf4 function\cf8  \cf9 turnOff\cf8 ()\cf2 \{\
+		\cf7 console\cf2 .log(\cf5 "turning off"\cf2 );\
+		ref.update(\{\
+			\cf5 "LED_STATUS"\cf2 : \cf5 "OFF"\cf2 \
+		\});\
+	\}	\
+    </\cf4 script\cf2 >\cb3 \
+\
+\cb1 </\cf4 body\cf2 >}

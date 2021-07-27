@@ -59,7 +59,7 @@
       "MOTOR_SPEED": document.getElementById('rangeinput').value
     }) 
   } 
-</code></pre> in order to add a slider variable to firebase. This vairable would get updated everytime the slider was moved and would be called up by the added arduino code when dons so. My code, seen below, uses <code>ledcWrite</code> to control the direction and speed of the motor since<code>analogWrite</code> does not work with the esp32 board. This arduino code is a copy of the one found on the couser website, but I changed variable names and added if statements within the loop function that helped control the slider along with the buttons.</p>
+</code></pre> in order to add a slider variable to firebase. This vairable would get updated everytime the slider was moved and would be called up by the added arduino code when done so. My code, seen below, uses <code>ledcWrite</code> to control the direction and speed of the motor since <code>analogWrite</code> does not work with the esp32 board. This arduino code is a copy of the one found on the couser website, but I changed variable names and added if statements within the loop function that helped control the slider along with the buttons.</p>
 <pre><code>
 #include WiFi.h>                                 // esp32 library
 #include FirebaseESP32.h>                        // firebase library
