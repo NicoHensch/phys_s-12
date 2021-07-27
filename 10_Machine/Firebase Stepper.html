@@ -9,6 +9,7 @@
 <body>
   <button id="mario" name="mario">Mario Theme </button>
   <button id="Rain" name="Rain"> Rob Scallon Rain </button>
+  <button id="Wii" name="Wii"> Wii Channel Theme </button>
   <button id="turn-off" name="turnoff">Turn Off </button>
   <div class="slidecontainer">
     <p>Default range slider:</p>
@@ -44,6 +45,7 @@
   document.getElementById('mario').addEventListener('click', mario, false);
   document.getElementById('turn-off').addEventListener('click', turnOff, false);
   document.getElementById('Rain').addEventListener('click', Rain, false);
+  document.getElementById('Wii').addEventListener('click', Wii, false);
  
   function mario(){
     console.log("playing mario");
@@ -65,6 +67,12 @@
       "STEPPER_STATUS": "RAIN"
     }) 
   } 
+  function Wii(){
+    console.log("playing Wii")
+    ref.update({
+      "STEPPER_STATUS": "WII"
+    }) 
+  }
     </script>
  
 </body>
