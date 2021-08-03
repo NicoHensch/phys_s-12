@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHYSCI 70: Introduction to Digital Fabrication</title>
+  <style>
+  .slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+</style>
+</head>
+ 
+<body>
+  <button id="turn-on" name="turnon">Turn On </button>
+  <button id="turn-off" name="turnoff">Turn Off </button>
+  
+ 
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+ 
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+ 
+  <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAd9CPOho-F0ry2M2MZtYX5nd3cmJpnRNw",
+    authDomain: "rc-car-d0e9b.firebaseapp.com",
+    databaseURL: "https://rc-car-d0e9b-default-rtdb.firebaseio.com",
+    projectId: "rc-car-d0e9b",
+    storageBucket: "rc-car-d0e9b.appspot.com",
+    messagingSenderId: "765661470911",
+    appId: "1:765661470911:web:44f350cfc1e2088dd9a60a"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ 
+  // Get a database reference to our blog
+  var ref = firebase.database().ref("/");
+ 
+  // make the buttons call the function below 
+  document.getElementById('forward').addEventListener('click', Forward, false);
+  document.getElementById('turn-off').addEventListener('click', turnOff, false);
+  document.getElementById('turn-left').addEventListener('click', turnLeft, false);
+  document.getElementById('turn-right').addEventListener('click', turnRight, false);
+  document.getElementById('reverse').addEventListener('click', Reverse, false);
+ 
+  function Forward(){
+    console.log("Forward");
+    ref.update({
+      "MOTOR_STATUS": "Forward"
+    });
+  }
+ 
+  function turnOff(){
+    console.log("turning off");
+    ref.update({
+      "MOTOR_STATUS": "OFF"
+    });
+  }
+  function turnLeft(){
+    console.log("Left");
+    ref.update({
+      "MOTOR_STATUS": "Left"
+    });
+  }
+  function turnRight(){
+    console.log("Right");
+    ref.update({
+      "MOTOR_STATUS": "Right"
+    });
+  }
+  function Reverse(){
+    console.log("Reverse");
+    ref.update({
+      "MOTOR_STATUS": "Reverse"
+    });
+  }
+
+   
+    </script>
+ 
+</body>
