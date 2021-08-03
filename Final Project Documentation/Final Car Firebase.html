@@ -78,10 +78,10 @@
  
   // make the buttons call the function below 
   document.getElementById('forward').addEventListener('mousedown', Forward, false);
-  document.getElementById('turn-off').addEventListener('click', turnOff, false);
-  document.getElementById('turn-left').addEventListener('click', turnLeft, false);
-  document.getElementById('turn-right').addEventListener('click', turnRight, false);
-  document.getElementById('reverse').addEventListener('click', Reverse, false);
+  document.getElementById('turn-off').addEventListener('mouseup', turnOff, false);
+  document.getElementById('turn-left').addEventListener('mousedown', turnLeft, false);
+  document.getElementById('turn-right').addEventListener('mousedown', turnRight, false);
+  document.getElementById('reverse').addEventListener('mousedown', Reverse, false);
  
   function Forward(){
     console.log("Forward");
