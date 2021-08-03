@@ -43,13 +43,7 @@
 </head>
  
 <body>
-  <button id="turn-on" name="forward">Forward </button>
-  <button id="turn-off" name="turnoff">Turn Off </button>
-  <button id="turn-off" name="turnleft">Turn Left </button>
-  <button id="turn-off" name="turnright">Turn Right </button>
-  <button id="turn-off" name="reverse">Reverse </button>
-  
- 
+   
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
  
@@ -57,6 +51,13 @@
       https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
  
+  <button id="forward" name="forward">Forward </button>
+  <button id="turn-off" name="turnoff">Turn Off </button>
+  <button id="turn-left" name="turnleft">Turn Left </button>
+  <button id="turn-right" name="turnright">Turn Right </button>
+  <button id="reverse" name="reverse">Reverse </button>
+  
+
   <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -76,9 +77,9 @@
   var ref = firebase.database().ref("/");
  
   // make the buttons call the function below 
-  document.getElementById('forward').addEventListener('click', Forward, false);
+  document.getElementById('forward').addEventListener('mousedown', Forward, false);
   document.getElementById('turn-off').addEventListener('click', turnOff, false);
-  
+  document.getElementById('turn-left').addEventListener('click', turnLeft, false);
   document.getElementById('turn-right').addEventListener('click', turnRight, false);
   document.getElementById('reverse').addEventListener('click', Reverse, false);
  
@@ -117,4 +118,5 @@
    
     </script>
  
+
 </body>
