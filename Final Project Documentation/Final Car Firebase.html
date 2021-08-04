@@ -32,12 +32,20 @@
       https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
  
+<div class="row" style="text-align:center;">
   <button id="forward" name="forward"><i class="fa fa-arrow-up"></i>Forward </button>
+</div>
   <button id="turn-off" name="turnoff">Turn Off </button>
+<div class="row" style="text-align: center;">
   <button id="turn-left" name="turnleft"><i class="fa fa-arrow-left"></i>Turn Left </button>
-  <button id="turn-right" name="turnright"><i class="fa fa-arrow-right"></i>Turn Right </button>
   <button id="reverse" name="reverse"><i class="fa fa-arrow-down"></i>Reverse </button>
-  
+  <button id="turn-right" name="turnright"><i class="fa fa-arrow-right"></i>Turn Right </button>
+</div>
+<div class="row" style="text-align: center;">
+  <button id="Fast" name="Fast">Fast</button> 
+  <button id="Medium" name="Medium">Medium</button>
+  <button id="Slow" name="Slow">Slow</button>
+</div>
 
   <script>
   // Your web app's Firebase configuration
@@ -63,6 +71,9 @@
   document.getElementById('turn-left').addEventListener('mousedown', turnLeft, false);
   document.getElementById('turn-right').addEventListener('mousedown', turnRight, false);
   document.getElementById('reverse').addEventListener('mousedown', Reverse, false);
+  document.getElementById('Fast').addEventListener('click', Reverse, false);
+  document.getElementById('Medium').addEventListener('click', Reverse, false);
+  document.getElementById('Slow').addEventListener('click', Reverse, false);
  
   function Forward(){
     console.log("Forward");
@@ -93,6 +104,24 @@
     console.log("Reverse");
     ref.update({
       "MOTOR_STATUS": "Reverse"
+    });
+  }
+  function Fast(){
+    console.log("Fast");
+    ref.update({
+      "MOTOR_SPEED": "Fast"
+    });
+  }
+  function Medium(){
+    console.log("Medium");
+    ref.update({
+      "MOTOR_SPEED": "Medium"
+    });
+  }
+  function Slow(){
+    console.log("Slow");
+    ref.update({
+      "MOTOR_SPEED": "Slow"
     });
   }
 
