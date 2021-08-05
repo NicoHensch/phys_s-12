@@ -35,16 +35,17 @@
 <div class="row" style="text-align:center;">
   <button id="forward" name="forward"><i class="fa fa-arrow-up"></i>Forward </button>
 </div>
-  <button id="turn-off" name="turnoff">Turn Off </button>
+  <button id="turn-off" name="turnoff"><i class="fa fa-power-off"></i>Turn Off </button>
 <div class="row" style="text-align: center;">
   <button id="turn-left" name="turnleft"><i class="fa fa-arrow-left"></i>Turn Left </button>
   <button id="reverse" name="reverse"><i class="fa fa-arrow-down"></i>Reverse </button>
   <button id="turn-right" name="turnright"><i class="fa fa-arrow-right"></i>Turn Right </button>
 </div>
-<div class="row" style="text-align: center;">
-  <button id="Fast" name="Fast">Fast</button> 
-  <button id="Medium" name="Medium">Medium</button>
-  <button id="Slow" name="Slow">Slow</button>
+<br>
+<div class="row" style="text-align:center;">
+  <button id="slalom" name="Slalom">Forward Slalom</button>
+  <button id="Backwards-Slalom" name="Slalom">Reverse Slalom</button>
+  <button id="Dance" name="Dance">Dance Party</button>
 </div>
 
   <script>
@@ -71,9 +72,9 @@
   document.getElementById('turn-left').addEventListener('mousedown', turnLeft, false);
   document.getElementById('turn-right').addEventListener('mousedown', turnRight, false);
   document.getElementById('reverse').addEventListener('mousedown', Reverse, false);
-  document.getElementById('Fast').addEventListener('click', Fast, false);
-  document.getElementById('Medium').addEventListener('click', Medium, false);
-  document.getElementById('Slow').addEventListener('click', Slow, false);
+  document.getElementById('slalom').addEventListener('mousedown', Slalom, false);
+  document.getElementById('Backwards-Slalom').addEventListener('mousedown', BackwardsSlalom, false);
+  document.getElementById('Dance').addEventListener('mousedown', Dance, false);
  
   function Forward(){
     console.log("Forward");
@@ -106,22 +107,22 @@
       "MOTOR_STATUS": "Reverse"
     });
   }
-  function Fast(){
-    console.log("Fast");
+  function Slalom(){
+    console.log("Slalom");
     ref.update({
-      "MOTOR_SPEED": "Fast"
+      "MOTOR_STATUS": "Slalom"
     });
   }
-  function Medium(){
-    console.log("Medium");
+  function BackwardsSlalom(){
+    console.log("Reverse Slalom");
     ref.update({
-      "MOTOR_SPEED": "Medium"
+      "MOTOR_STATUS": "Reverse Slalom"
     });
   }
-  function Slow(){
-    console.log("Slow");
+  function Dance(){
+    console.log("Dance");
     ref.update({
-      "MOTOR_SPEED": "Slow"
+      "MOTOR_STATUS": "Dance"
     });
   }
 

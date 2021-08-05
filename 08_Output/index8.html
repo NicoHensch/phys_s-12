@@ -80,173 +80,172 @@ case waitingForButton2:
       break;
     </code></pre>
            The code for lighting up specific LED pixels can be found on the course website. These second cases all pushed to a singular, final case that simply made the light stay on for 2 seconds and then print "buttons pressed" to the serial monitor. Here is my final code and a video displaying the project in action.</p> 
-  <pre>
-<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">Adafruit_NeoPixel</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+    <pre><code>
+      #include >Adafruit_NeoPixel.h>
 
-<font color="#5e6d03">#define</font> <font color="#000000">PIN</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">6</font>
-<font color="#5e6d03">#define</font> <font color="#000000">NUMPIXELS</font> <font color="#000000">10</font>
+#define PIN        6
+#define NUMPIXELS 10
 
 
-<b><font color="#d35400">Adafruit_NeoPixel</font></b> <font color="#000000">strip</font><font color="#000000">(</font><font color="#000000">NUMPIXELS</font><font color="#434f54">,</font> <font color="#000000">PIN</font><font color="#434f54">,</font> <font color="#d35400">NEO_GRB</font> <font color="#434f54">+</font> <font color="#d35400">NEO_KHZ800</font><font color="#000000">)</font><font color="#000000">;</font>
+Adafruit_NeoPixel strip(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">button1</font> <font color="#434f54">=</font> <font color="#000000">13</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">button2</font> <font color="#434f54">=</font> <font color="#000000">12</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">button3</font> <font color="#434f54">=</font> <font color="#000000">11</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">button4</font> <font color="#434f54">=</font> <font color="#000000">10</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">button5</font> <font color="#434f54">=</font> <font color="#000000">9</font><font color="#000000">;</font>
-<font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">waitStart</font><font color="#000000">;</font>
-<font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
-<font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">period</font> <font color="#434f54">=</font> <font color="#000000">5000</font><font color="#000000">;</font>
+const int button1 = 13;
+const int button2 = 12;
+const int button3 = 11;
+const int button4 = 10;
+const int button5 = 9;
+unsigned long waitStart;
+unsigned long currentMillis;
+unsigned long period = 5000;
 
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForAnyButton</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForButton2</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForButton1</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForButton3</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForButton4</font> <font color="#434f54">=</font> <font color="#000000">5</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">waitingForButton5</font> <font color="#434f54">=</font> <font color="#000000">6</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">bothButtonsPressed</font> <font color="#434f54">=</font> <font color="#000000">3</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">byte</font> <font color="#000000">ButtonsPressed</font> <font color="#434f54">=</font> <font color="#000000">7</font><font color="#000000">;</font>
+const byte waitingForAnyButton = 0;
+const byte waitingForButton2 = 1;
+const byte waitingForButton1 = 2;
+const byte waitingForButton3 = 4;
+const byte waitingForButton4 = 5;
+const byte waitingForButton5 = 6;
+const byte bothButtonsPressed = 3;
+const byte ButtonsPressed = 7;
 
-<font color="#00979c">byte</font> <font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
+byte currentState = waitingForAnyButton;
 
-<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
- &nbsp;<font color="#434f54">&#47;&#47; put your setup code here, to run once:</font>
- &nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">show</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setBrightness</font><font color="#000000">(</font><font color="#000000">10</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">115200</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for a button press&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font> <font color="#000000">(</font><font color="#000000">button1</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font> <font color="#000000">(</font><font color="#000000">button2</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font> <font color="#000000">(</font><font color="#000000">button3</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font> <font color="#000000">(</font><font color="#000000">button4</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font> <font color="#000000">(</font><font color="#000000">button5</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font>
+void setup() {
+  // put your setup code here, to run once:
+  strip.begin();
+  strip.show();
+  strip.setBrightness(10);
+  Serial.begin(115200);
+  Serial.println("Waiting for a button press");
+  pinMode (button1, INPUT_PULLUP);
+  pinMode (button2, INPUT_PULLUP);
+  pinMode (button3, INPUT_PULLUP);
+  pinMode (button4, INPUT_PULLUP);
+  pinMode (button5, INPUT_PULLUP);
+}
 
-<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
- &nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">clear</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47; put your main code here, to run repeatedly:</font>
- &nbsp;<font color="#000000">currentMillis</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#5e6d03">switch</font> <font color="#000000">(</font><font color="#000000">currentState</font><font color="#000000">)</font>
- &nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForAnyButton</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button1</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForButton2</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">waitStart</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for button 2&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+void loop() {
+  strip.clear();
+  // put your main code here, to run repeatedly:
+  currentMillis = millis();
+  switch (currentState)
+  {
+    case waitingForAnyButton:
+      if (digitalRead(button1) == LOW)
+      {
+        currentState =  waitingForButton2;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 2");
+      }
 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button2</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForButton1</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">waitStart</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for button 1&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button3</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForButton4</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">waitStart</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for button 4&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+      if (digitalRead(button2) == LOW)
+      {
+        currentState =  waitingForButton1;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 1");
+      }
+      if (digitalRead(button3) == LOW)
+      {
+        currentState =  waitingForButton4;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 4");
+      }
 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button4</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForButton5</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">waitStart</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for button 5&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button5</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForButton3</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">waitStart</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for button 3&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForButton2</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">waitStart</font> <font color="#434f54">&gt;=</font> <font color="#000000">period</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for any button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button2</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">ButtonsPressed</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">2</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">188</font><font color="#434f54">,</font> <font color="#000000">143</font><font color="#434f54">,</font> <font color="#000000">143</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">188</font><font color="#434f54">,</font> <font color="#000000">143</font><font color="#434f54">,</font> <font color="#000000">143</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForButton1</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">waitStart</font> <font color="#434f54">&gt;=</font> <font color="#000000">period</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for any button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button1</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">ButtonsPressed</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
+      if (digitalRead(button4) == LOW)
+      {
+        currentState =  waitingForButton5;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 5");
+      }
+      if (digitalRead(button5) == LOW)
+      {
+        currentState =  waitingForButton3;
+        waitStart = currentMillis;
+        Serial.println("Waiting for button 3");
+      }
+      break;
+    //
+    case waitingForButton2:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button2) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(2, strip.Color(188, 143, 143));
+        strip.setPixelColor(3, strip.Color(188, 143, 143));
+      }
+      break;
+    //
+    case waitingForButton1:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button1) == LOW)
+      {
+       currentState = ButtonsPressed;
+       strip.setPixelColor(0, strip.Color(150, 0, 150));
+       strip.setPixelColor(1, strip.Color(150, 0, 150));
+      }
+      break;
+    //
  
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForButton3</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">waitStart</font> <font color="#434f54">&gt;=</font> <font color="#000000">period</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for either button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button3</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">ButtonsPressed</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">4</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">5</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForButton4</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">waitStart</font> <font color="#434f54">&gt;=</font> <font color="#000000">period</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for any button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button4</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">ButtonsPressed</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">6</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">7</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">waitingForButton5</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">waitStart</font> <font color="#434f54">&gt;=</font> <font color="#000000">period</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> &nbsp;<font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for any button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">button5</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">ButtonsPressed</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">8</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">setPixelColor</font><font color="#000000">(</font><font color="#000000">9</font><font color="#434f54">,</font> <font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">Color</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;</font>
- &nbsp;&nbsp;&nbsp;<font color="#5e6d03">case</font> <font color="#000000">ButtonsPressed</font><font color="#434f54">:</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;buttons pressed in time&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">2000</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Waiting for any button&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#000000">waitingForAnyButton</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">break</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">}</font>
- &nbsp;<font color="#000000">strip</font><font color="#434f54">.</font><font color="#d35400">show</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+    case waitingForButton3:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for either button");
+      }
+      if (digitalRead(button3) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(4, strip.Color(150, 0, 0));
+        strip.setPixelColor(5, strip.Color(150, 0, 0));
+      }
+      break;
+    //
+    case waitingForButton4:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button4) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(6, strip.Color(0, 150, 150));
+        strip.setPixelColor(7, strip.Color(0, 150, 150));
+      }
+      break;
+    //
+    case waitingForButton5:
+      if (currentMillis - waitStart >= period)
+      {
+        currentState =  waitingForAnyButton;
+        Serial.println("Waiting for any button");
+      }
+      if (digitalRead(button5) == LOW)
+      {
+        currentState = ButtonsPressed;
+        strip.setPixelColor(8, strip.Color(0, 150, 0));
+        strip.setPixelColor(9, strip.Color(0, 150, 0));
+      }
+      break;
+    //
+    case ButtonsPressed:
+      Serial.println("buttons pressed in time");
+      delay(2000);
+      Serial.println("Waiting for any button");
+      currentState = waitingForAnyButton;
+      break;
+  }
+  strip.show();
 
-<font color="#000000">}</font>
-
-</pre>
+}
+    </code></pre>
     <video width="500" height="420" controls>
         <source src="LEDMovie.mp4" type="video/mp4">
       </video>

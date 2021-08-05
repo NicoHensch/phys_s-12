@@ -45,12 +45,494 @@
   <h3>Final Project: Process & Product</h3> <br> 
   <div class="container-fluid">
     <h4>Demo Video</h4>
-      <video width="500" height="420" controls>
-        <source src="LEDMovie.mp4" type="video/mp4">
-      </video>
+      <iframe width="560" height="315" src="https://wwww.youtube.com/embed/ZXEoY8I4Eac" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
     <h4>Inspiration</h4>
-    <p>I chose to make a remote controlled car for a very simple reason. I like cars. More specifically, over the past couple of years I have become fascinated with formula 1, a fast paced racing championship. Although it may appear to be just some cars driving around in circles very quickly, there is an incredible amount of engineering that occurs behind the scenes. New ideas on aerodynamics, bio feuls, reusable energy, and safety are all being pioneered by skilled engineers. It is because of this that I have been drawn to engineering to begin with and it only seemed fitting to make my final project have something to do with F1. Although, my RC car can not go 250 mph, or looks identitical to an F1 car, it was still an incredibly challenging project for a newbie engineer like me. Below is a breakdown of the steps I took and the components I used to make my RC car.</p>
-    <h4><a href="Final Car Firebase.html">link</a> 
+    <p>I chose to make a remote controlled car for a very simple reason. I like cars. More specifically, over the past couple of years I have become fascinated with formula 1, a fast paced racing championship. Although it may appear to be just some cars driving around in circles very quickly, there is an incredible amount of engineering that occurs behind the scenes. New ideas on aerodynamics, bio feuls, reusable energy, and safety are all being pioneered by skilled engineers. It is because of this that I have been drawn to engineering to begin with and it only seemed fitting to make my final project have something to do with F1. Although, my RC car can not go 250 mph, or looks identitical to an F1 car, it was still an incredibly challenging project for a newbie engineer like me. Below is a breakdown of the steps I took and the components I used to make my RC car.</p> 
+    <h4>Main Body</h4>
+    <p> For the Main body of the car, I decided to make it out of laser cut balsa wood. Before making the design for the laser cutting, I already knew that I wanted to have a specific pattern of 3 mm holes, sperated 5 mm apart from center to center. This is because I already had screws, nuts, and joints that were meant for 3 mm holes. The L-brackets I am using to connect the walls to the floor are 3D printed but are not of my creation. This pattern just made the assembly of my car incredibly easy and efficient and also had the added bonus of making a cool pattern. Here is a Fusion 360 model of my pieces, a downloadable DXF file, and photos of the screws, nuts, and joints as well as the wood post-cutting and assembly.</p>
+    <iframe src="https://a360.co/3ly4XkU" title="Assembly of Laser Cut Pieces" class="col-md-12" height="600" allowfullscreen></iframe>
+    <div class="row">
+      <img src="Cut.png" class="img-responsive-margin" style="width:30%" alt="Cut Pieces">
+      <img src="Joints.png" class="img-responsive-margin" style="width:30%" alt="Nuts, Screws, L-brackets">
+      <img src="Assembled.png" class="img-responsive-margin" style="width:30%" alt="Assembled Car">
+    </div>
+    <a download href="Assembly of Car.dxf">Downloadable .dxf file</a>
+
+    <p>The design I went for is quite minimalist and is based around the idea of a soap box car. It has one longer floor section, two side flaps, and a roof that is 4 centimeters shorter than the base. I intentionally made the roof shorter because I wanted to leave some room for my hand to enter the box in case I needed to grab or adjust something inside.  
+      <ui>The dimensions are as follows:
+        <li>Floor: 21 5mm x 90 mm</li>
+        <li> Sides: 215 mm base, 60 mm height1, 40 mm height2</li>
+        <li> Front: 84 mm x 40 mm</li>
+        <li>Roof: 170 mm x 84 mm</li>
+      </ui>  I made each part as a sepearate file/body then imported them into a single file for assembly. I used the move/copy tool, more specifically the point to point translation tool, to align them properly. One of the only challenges I faced while building this was attaching the roof. Since I have pretty big hands, it was difficult to screw in the roof into the L-bracket form the inside. If I were to make another version of this car, I would have one, made it a little bigger so it could have a more accesible inside, and two, use more L-brackets since some of the pieces are a little unstable. I sadly did not have that many plastic L-brackets lying around, so I ended up using only 6. Maybe next time I would use 8 or 10.</p>
+    <h4>Attaching the Wheels</h4>
+    <p>Once I had the main body fo the car complete, I had to attach the wheels. Although this might sound easy, it wasn't. While prototyping with cardboard, I found that zipties seemed to work the best when trying to hold down the two DC motors. However, when I tried to do the same thing with my lasercut boards, I realized that the holes were too small. Luckily I was able to find a small-width zip tie in my kit which was able to fit into the 3mm hole. For the other DC motor, I had to cut a large zip tie down the middle to halve it's width and make it fit.<p>
+      <img src="Rear Wheels.png" class="img-responsive-margin" style="width:30%" alt="Rear Motors">
+    <p>For the front two wheels, which are not contorlled by motors, I was able to use twine from my kit to secure them down. The wheels are LEGO wheels and are attached to LEGO squares with a round peg. The steps I took while tying the wheels down are displayed through my diagrm below. The final tie is also shown more clearly below.</p>
+    <div class="row">
+      <img src="Diagram.png" class="img-responsive-margin" style="width:70%" alt="Diagram">
+      <img src="Front Wheels.png" class="img-responsive-margin" style="width:30%" alt="Front Wheels">
+    </div>
+    <h4>Circuit</h4>
+    <p>The Circuit that I used is fairly simple but looks quite complicated due to the large number of female to female cables. The microcontroller I am using is the Adafruit Huzzah ESP32 Feather because it allows me to use the wifi which is requiered for my project. The first thing I did once my controller was attached to the breadboard was to connect the L9110 motor driver. For power I used the microcontrollers USB source since it delivered more power than the 3.3 V port. I plugged the driver into ground and then A1-A into pin 4, A1-B to pin 5, B1-A to 12, and B1-B to 27. From there I also added three LED's: red, green, blue and orange to 13, 33, 32 and 15 in that order. These lights are to be indicator lights for when the car performs certain tasks such as left and right turns, reversing, and moving forward.</p>
+    <img src="Circuit.png" class="img-responsive-margin" style="width:30%" alt="Circuit">
+    <p>The blue and orange LED's are ticking out the sides of the car because that is where they will be in the final model but the red and green LED's are floating near the back since they will be going through the roof and front of the car. The circuitry looks quite messy but I assure you it is not that bad. If I were to do this again, I would try and organize my lines better so it is easier to spot when there is a problem. Similarly, I would try and find smaller female to female connectors since these are quite long.</p>
+    <h4>The Code</h4>
+    The code that I am using is a code that I have been playing with and adapting since the week 9: Networking/ IoT class. This code works with Google Firebase, a free database to host projects, to create a website that controls the car at the push of a button. The first part of the code introduces the Arduino IDE libraries required for this project. Then comes definitions to connect to my WiFi, so the board can communicate with the website followed by my variables being defined to their respective pins. The Secret key is blank so people dont hack my board as well as my WiFi. Next comes the <code> void Setup()</code> function. Here, I define my motors and LED's as <code>OUTPUT</code> and have them begin in the off position. I also include more WiFi code that was given to us when setting up the firebase project on google. Finally, we arrive at the main code. Within the <code>void loop()</code> function, I have 8 different functions that all correspod to different buttons found on my webpage. They are: Forward, Reverse, Left Turn, Right Turn, Forward Slalom, Reverse Slalom, Dance Party, and Off. They all have a similar structure which uses the <code>digitalWrite()</code> function to control the speed and direction of the motors. If I were to do this again I would have loved to be able to control the speed of the car using PWM, pulse width modulation, but I wasn't able to figure itout in time for the presentation.</p>
+    <div style="width:70%;height:700px;line-height:2em;overflow:auto;padding:5px;" class="center">
+      <pre>
+        <code>
+    #include ?WiFi.h>                                 // esp32 library
+#include ?FirebaseESP32.h>                        // firebase library
+
+#define FIREBASE_HOST "https://rc-car-d0e9b-default-rtdb.firebaseio.com"  // the project name address from firebase id
+#define FIREBASE_AUTH "5SZmj25Fysh4O3UMXfsqpXYcvhzSEVVElUJuplI5"                          // the secret key generated from firebase
+#define WIFI_SSID "FiOS-ZJK69"                                // input your home or public wifi name
+#define WIFI_PASSWORD "way2989grab4612six"                            // password of wifi ssid
+
+String fireString = "";// motor status received from firebase
+int fireInt = 512;
+const int A1A = 4; //left rear motor
+const int A1B = 5;
+const int B1A = 12; //right rear motor
+const int B1B = 27;
+const int ledRed = 13;
+const int ledGreen = 33;
+const int ledOrange = 15;
+const int ledBlue = 32;
+
+
+
+
+//Define FirebaseESP32 data object
+FirebaseData firebaseData;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  pinMode(ledRed, OUTPUT);          // define LED's as outputs and start with them off
+  digitalWrite(ledRed, LOW);
+  pinMode(ledGreen, OUTPUT);
+  digitalWrite(ledGreen, LOW);
+  pinMode(ledOrange, OUTPUT);
+  digitalWrite(ledOrange, LOW);
+  pinMode(ledBlue, OUTPUT);
+  digitalWrite(ledBlue, LOW);
+  pinMode(A1A, OUTPUT);             // make motors outputs
+  pinMode(A1B, OUTPUT);
+  pinMode(B1A, OUTPUT);
+  pinMode(B1B, OUTPUT);
+  digitalWrite(B1B, LOW);           // start with motors off
+  digitalWrite(A1B, LOW);
+
+
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);                          // try to connect with wifi
+
+  Serial.print("Connecting to ");
+  Serial.print(WIFI_SSID);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println();
+  Serial.print("Connected to ");
+  Serial.println(WIFI_SSID);
+  Serial.print("IP Address is : ");
+  Serial.println(WiFi.localIP());                                // print local IP address
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);                  // connect to firebase
+  Firebase.reconnectWiFi(true);
+  //Firebase.set(firebaseData, "/MOTOR_STATUS", "OFF");// set initial string of "OFF"
+}
+
+void loop() {
+
+  Firebase.get(firebaseData, "/MOTOR_STATUS");// get motor status input from firebase
+  fireString = firebaseData.stringData(); // change to e.g. intData() or boolData()
+  Serial.println(fireString);
+
+  if (fireString == "Forward") {                    // compare the input of led status received from firebase
+    Serial.println("Motor Turned ON, going forward fast");
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, HIGH);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledRed, LOW);
+  }
+  else if (fireString == "OFF") {              // compare the input of led status received from firebase
+    Serial.println("car Turned OFF");
+    digitalWrite(A1B, LOW);                 // make output led OFF
+    digitalWrite(B1B, LOW);
+    digitalWrite(A1A, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledRed, LOW);
+  }
+
+  else if (fireString == "Left") {
+    Serial.println("car turning left");
+    digitalWrite(A1B, LOW);
+    digitalWrite(A1A, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledOrange, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(500);                       // wait for a second
+    digitalWrite(ledOrange, LOW);    // turn the LED off by making the voltage LOW
+    delay(500);                       //
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledRed, LOW);
+  }
+  else if (fireString == "Right") {
+    Serial.println("car turning right");
+    digitalWrite(A1B, HIGH);
+    digitalWrite(A1A, LOW);
+    digitalWrite(B1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(ledBlue, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(500);                    // wait for a second
+    digitalWrite(ledBlue, LOW);    // turn the LED off by making the voltage LOW
+    delay(500);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledRed, LOW);
+  }
+  else if (fireString == "Reverse") {
+    Serial.println("Car reversing");
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledRed, HIGH);
+    delay(500);
+    digitalWrite(ledRed, LOW);
+    delay(500);
+
+  }
+  else if (fireString == "Slalom") {
+    Serial.println("Doing Slalom Forwards");
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, HIGH);
+    digitalWrite(ledGreen, LOW);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B,HIGH);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1B, HIGH);
+    digitalWrite(A1A, LOW);
+    digitalWrite(B1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B,HIGH);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, HIGH);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B,HIGH);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+  }
+ 
+  else if (fireString == "Reverse Slalom") {
+    Serial.println("Doing Reverse Slalom");
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledRed, LOW);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B,LOW);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledRed, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, HIGH);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B,LOW);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledRed, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, LOW);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B,LOW);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledRed, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, LOW);
+    delay(3000);
+    
+  }
+  else if (fireString == "Dance") {
+    Serial.println("Dance Party!");
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, HIGH);
+    digitalWrite(ledRed, HIGH);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, HIGH);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, HIGH);
+    digitalWrite(ledRed, LOW);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledRed, HIGH);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, HIGH);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, LOW);
+    digitalWrite(ledRed, LOW);
+    delay(2000);
+    digitalWrite(A1A, HIGH);
+    digitalWrite(A1B, LOW);
+    digitalWrite(B1A, LOW);
+    digitalWrite(B1B, HIGH);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, LOW);
+    digitalWrite(ledOrange, HIGH);
+    digitalWrite(ledRed, HIGH);
+    delay(2000);
+    digitalWrite(A1A, LOW);
+    digitalWrite(A1B, HIGH);
+    digitalWrite(B1A, HIGH);
+    digitalWrite(B1B, LOW);
+    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledOrange, HIGH);
+    digitalWrite(ledRed, LOW);
+    delay(2000);
+  }
+  else {
+    Serial.println("Please send ON/OFF");
+
+  }
+}
+    </code>
+  </pre>
+</div>
+<h4>Webpage</h4>
+<p>While I was working on my code, I also worked to make the corresponding webpage that would control the car wirelessly. As mentioned before, I used Google's Firebase system to do so. Using the steps given by Proffesor Melenbrink on the course website, under the Week 9 tab, I was able to set up my data base and control the car through there. However, controlling the car through the database is very finicky since it is very case sensitive, and inputting a uppercase letter as lowercase will not allow it work. Because of this, I decded to make a webpage for a better user interface. Luckily, google firebase can do this for us. Following their steps, I created a new html page in my Final Project folder. Using the code structure Proffessor Melenbrink gave us, I plugged in the firebase generated configuration code so it connected with my project. From there, I edited the webpage as I would any other, to customize it to fit my needs. I added 6 more buttons, totaling to 8, and arranged them in a manner that made sense to me. In order to connect the buttons to the firebase database, which would then tell the corresponding code to run, I used the <code> document.getElementById</code> and <code>addEventListener</code>. This reads any button press then tells the database to update, which then forces a code to run. Here is my html code. If I were to do this again I would have tried to use blue tooth to see if there was less of a delay between a button press and the car actually moving. (I had to change all of the "<" to "?" or else the text editor would read it as new code for the webpage.)</p>
+  <h4><a href="Final Car Firebase.html">My Webpage</a>
+<div style="width:70%;height:700px;line-height:2em;overflow:auto;padding:5px;" class="center">
+      <pre>
+        <code>
+          <!doctype html>
+?html class="no-js" lang="en">
+?head>
+  ?meta charset="utf-8" />
+  ?meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  ?title>PHYSCI 70: Introduction to Digital Fabrication</title>
+  ?link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  ?style>
+  
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+?/style>
+?/head>
+ 
+?body>
+   
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  ?script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"><?script>
+ 
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  ?script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js">?/script>
+ 
+?div class="row" style="text-align:center;">
+  ?button id="forward" name="forward">?i class="fa fa-arrow-up">?/i>Forward ?/button>
+?/div>
+  ?button id="turn-off" name="turnoff"><?i class="fa fa-power-off">?/i>Turn Off <?button>
+?div class="row" style="text-align: center;">
+  ?button id="turn-left" name="turnleft"><?i class="fa fa-arrow-left">?/i>Turn Left ?/button>
+  ?button id="reverse" name="reverse">?i class="fa fa-arrow-down">?/i>Reverse ?/button>
+  ?button id="turn-right" name="turnright">?i class="fa fa-arrow-right">?/i>Turn Right ?/button>
+?/div>
+?br>
+?div class="row" style="text-align:center;">
+  ?button id="slalom" name="Slalom">Forward Slalom>button>
+  ?button id="Backwards-Slalom" name="Slalom">Reverse Slalom>/button>
+  ?button id="Dance" name="Dance">Dance Party>/button>
+?/div>
+
+  ?script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAd9CPOho-F0ry2M2MZtYX5nd3cmJpnRNw",
+    authDomain: "rc-car-d0e9b.firebaseapp.com",
+    databaseURL: "https://rc-car-d0e9b-default-rtdb.firebaseio.com",
+    projectId: "rc-car-d0e9b",
+    storageBucket: "rc-car-d0e9b.appspot.com",
+    messagingSenderId: "765661470911",
+    appId: "1:765661470911:web:44f350cfc1e2088dd9a60a"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ 
+  // Get a database reference to our blog
+  var ref = firebase.database().ref("/");
+ 
+  // make the buttons call the function below 
+  document.getElementById('forward').addEventListener('mousedown', Forward, false);
+  document.getElementById('turn-off').addEventListener('mousedown', turnOff, false);
+  document.getElementById('turn-left').addEventListener('mousedown', turnLeft, false);
+  document.getElementById('turn-right').addEventListener('mousedown', turnRight, false);
+  document.getElementById('reverse').addEventListener('mousedown', Reverse, false);
+  document.getElementById('slalom').addEventListener('mousedown', Slalom, false);
+  document.getElementById('Backwards-Slalom').addEventListener('mousedown', BackwardsSlalom, false);
+  document.getElementById('Dance').addEventListener('mousedown', Dance, false);
+ 
+  function Forward(){
+    console.log("Forward");
+    ref.update({
+      "MOTOR_STATUS": "Forward"
+    });
+  }
+ 
+  function turnOff(){
+    console.log("turning off");
+    ref.update({
+      "MOTOR_STATUS": "OFF"
+    });
+  }
+  function turnLeft(){
+    console.log("Left");
+    ref.update({
+      "MOTOR_STATUS": "Left"
+    });
+  }
+  function turnRight(){
+    console.log("Right");
+    ref.update({
+      "MOTOR_STATUS": "Right"
+    });
+  }
+  function Reverse(){
+    console.log("Reverse");
+    ref.update({
+      "MOTOR_STATUS": "Reverse"
+    });
+  }
+  function Slalom(){
+    console.log("Slalom");
+    ref.update({
+      "MOTOR_STATUS": "Slalom"
+    });
+  }
+  function BackwardsSlalom(){
+    console.log("Reverse Slalom");
+    ref.update({
+      "MOTOR_STATUS": "Reverse Slalom"
+    });
+  }
+  function Dance(){
+    console.log("Dance");
+    ref.update({
+      "MOTOR_STATUS": "Dance"
+    });
+  }
+
+   
+    >/script>
+ 
+
+?/body>
+</code>
+</pre>
+</div>
+<h4>Final Product</h4>
+<div class="row">
+  <img src="Front1.png" class="img-responsive-margin" style="width:30%" alt="Final Car">
+  <img src="Front2.png" class="img-responsive-margin" style="width:30%" alt="Final Car">
+  <img src="Rear.png" class="img-responsive-margin" style="width:30%" alt="Final Car">
+</div>
+<p>Here is the final car all put together! Even though this might seem quite simple to some, it was a tough challenge for me and I really enjoyed working on it. Hoepfully the next time I can make it more closely resemble an actual race car and be able to control it's speed. This has been a great summer and I can't wait to learn more about engineering. Thanks!</p>
+
+
 
 
 </body>
